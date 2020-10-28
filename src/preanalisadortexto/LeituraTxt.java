@@ -13,6 +13,8 @@ import java.io.FileReader;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,12 +22,13 @@ import java.util.Map;
  * @author Alexandre
  */
 public class LeituraTxt {
-    
+    /*
     public String modelo;
     public String cor;
     private float ponta;
     protected int carga;
     protected boolean tampada;
+   
     public void status()
     {
             System.out.println("Modelo: " +this.modelo);
@@ -33,26 +36,19 @@ public class LeituraTxt {
             System.out.println("Ponta: " + this.ponta);
             System.out.println("Carga: " + this.carga);
             System.out.println("Está tampada? " + this.tampada);
-    }
+    }*/
 
-    public float getPonta() {
-            return ponta;
-    }
-
-    public void setPonta(float ponta) {
-            this.ponta = ponta;
-    }
+  
 
     public static ArrayList lerArquivo()
     {
         String linha = new String();
-        String nomeArquivo = "D:\\Dados\\Documentos\\Alexandre\\Unicamp\\4 Semestre\\Poo\\Projeto 1\\Ex5_TresMotivosParaVacinarSeuPet.txt";
-        String nomeArquivo2 = "D:\\Dados\\Documentos\\Alexandre\\Unicamp\\4 Semestre\\Poo\\Projeto 1\\Ex4_Parabens.txt";
+        String nomeArquivo2 = "D:\\Dados\\Documentos\\Alexandre\\Unicamp\\4 Semestre\\Poo\\Projeto 1\\Ex5_TresMotivosParaVacinarSeuPet.txt";
+        String nomeArquivo = "D:\\Dados\\Documentos\\Alexandre\\Unicamp\\4 Semestre\\Poo\\Projeto 1\\Ex4_Parabens.txt";
         File arq = new File(nomeArquivo);
         ArrayList texto = new ArrayList();
         if(arq.exists()){
-            
-             
+                   
             try{
                 
                 FileReader leitorArquivos = new FileReader(nomeArquivo);
@@ -87,9 +83,11 @@ public class LeituraTxt {
                     
                     for(String nome : textoSeparado){
                         if(!linha.trim().equals("")){
-                            texto.add(nome);
+                            texto.add(nome.trim());
+                            
                         }
                     }
+                //    System.out.println(texto);
 /*
                     
                         texto.add(Arrays.toString(textoSeparado).replace("[","").replace("]",""));
@@ -138,31 +136,44 @@ public class LeituraTxt {
         ListMultimap<String, String> multimap = ArrayListMultimap.create();
 
         //when
-        multimap.put(parabens, "para");
+       /*
         multimap.put(para, "voce");
         multimap.put(voce, "nesta");
-        multimap.put(para, "pedro");
+        multimap.put(para, "voce");
         multimap.put(voce, "quer");
         multimap.put("queijo", "minas");
-        
+        */
         int j=1;
-                
+
         for(int i=0;i<(texto.size()-1);i++,j++){ 
-            
-            
-            System.out.println(texto.get(i) + "," +texto.get(j) );
+             
+           List<String> Key = multimap.get(texto.get(i).toString().trim());
+          
+           if(!Key.contains(texto.get(j).toString().trim()))
+           {
+               multimap.put(texto.get(i).toString().trim(), texto.get(j).toString().trim());
+           }
+
+           //System.out.println(multimap.keySet());
+           //System.out.println(texto.get(i) + "," +texto.get(j) );
         
          }
-
+            
         //then
-       /* System.out.println(multimap);
-        System.out.println(multimap.keySet());*/
-    }
-   
-
-    
-    void destampar()
-    {
-            this.tampada = false;
+        System.out.println(multimap);
+        System.out.println(multimap.keySet());
+        
+        List<String> testao = new ArrayList<>(multimap.keySet()); 
+        Collections.sort(testao);
+        
+        //System.out.println(testao);
+                
+        for (String testes : testao) {
+            List<String> lastNames = multimap.get(testes);
+            
+            for(int m=0;m< lastNames.size();m++){
+                System.out.println(testes + ", " + lastNames.get(m));
+            }
+        }   
     }
 }
