@@ -32,6 +32,7 @@ public class PreAnalisadorTexto {
        
         retorno = LeituraTxt.lerArquivo();
         
+       // System.out.println(retorno);
         teste.multimap(retorno);
         
        // System.out.println(retorno);

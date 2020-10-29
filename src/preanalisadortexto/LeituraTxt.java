@@ -43,8 +43,8 @@ public class LeituraTxt {
     public static ArrayList lerArquivo()
     {
         String linha = new String();
-        String nomeArquivo2 = "D:\\Dados\\Documentos\\Alexandre\\Unicamp\\4 Semestre\\Poo\\Projeto 1\\Ex5_TresMotivosParaVacinarSeuPet.txt";
-        String nomeArquivo = "D:\\Dados\\Documentos\\Alexandre\\Unicamp\\4 Semestre\\Poo\\Projeto 1\\Ex4_Parabens.txt";
+        String nomeArquivo = "D:\\Dados\\Documentos\\Alexandre\\Unicamp\\4 Semestre\\Poo\\Projeto 1\\Ex5_TresMotivosParaVacinarSeuPet.txt";
+        String nomeArquivo2 = "D:\\Dados\\Documentos\\Alexandre\\Unicamp\\4 Semestre\\Poo\\Projeto 1\\Ex4_Parabens.txt";
         File arq = new File(nomeArquivo);
         ArrayList texto = new ArrayList();
         if(arq.exists()){
@@ -63,7 +63,7 @@ public class LeituraTxt {
                     linha = linha.replace( "/" , ""); //tira barra
                     linha = linha.replace( "-" , ""); //tira hífen 
                     //linha = linha.replace( " " , ""); //tira espaço em branco
-                    linha = linha.replace( "," , ""); //tira ponto
+                    linha = linha.replace( "," , ""); //tira virgula
                     linha = linha.replace( ";" , ""); //tira ponto
                     linha = linha.replace( ":" , ""); //tira ponto
                     linha = linha.replace( "!" , ""); //tira ponto
@@ -71,19 +71,20 @@ public class LeituraTxt {
                     
                     
                    // System.out.println(linha);
-                    ArrayList lista = new ArrayList();     
+                   // ArrayList lista = new ArrayList();     
                     
-                    lista.add(linha);
+                   // lista.add(linha);
                     
                     String[] textoSeparado = linha.split(" ");
-                    
+                   // System.out.println(textoSeparado);
                     //System.out.println(textoSeparado);
-                   // System.out.println(Arrays.toString(textoSeparado));
+                  //  System.out.println(Arrays.toString(textoSeparado));
                   //  System.out.println(textoSeparado.length);
                     
                     for(String nome : textoSeparado){
                         if(!linha.trim().equals("")){
                             texto.add(nome.trim());
+                           // System.out.println(nome.trim());
                             
                         }
                     }
@@ -98,11 +99,12 @@ public class LeituraTxt {
                     //lista.trimToSize();
 
                     
-                    if(linha != null){
-                    } else {
+                    if(linha == null){
+                         break;
+                    } 
                         
-                        break;
-                    }
+                       
+     
                     
                 } 
                 
@@ -127,11 +129,14 @@ public class LeituraTxt {
         return Normalizer.normalize(str, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
     }
     
-    public void multimap(ArrayList texto)
+    public static void multimap(ArrayList texto)
     {
-        String para = "para";
+      /*  String para = "para";
         String parabens = "parabens";
-        String voce = "voce";
+        String voce = "voce";*/
+        
+        
+        ArrayList textoCsv = new ArrayList< ArrayList>();
         
         ListMultimap<String, String> multimap = ArrayListMultimap.create();
 
@@ -148,9 +153,10 @@ public class LeituraTxt {
         for(int i=0;i<(texto.size()-1);i++,j++){ 
              
            List<String> Key = multimap.get(texto.get(i).toString().trim());
-          
+         //   System.out.println("Teste " + multimap.get(texto.get(i).toString().trim()));
            if(!Key.contains(texto.get(j).toString().trim()))
            {
+    
                multimap.put(texto.get(i).toString().trim(), texto.get(j).toString().trim());
            }
 
@@ -166,14 +172,39 @@ public class LeituraTxt {
         List<String> testao = new ArrayList<>(multimap.keySet()); 
         Collections.sort(testao);
         
-        //System.out.println(testao);
+        System.out.println(testao);
+        
+        String conteudos = new String();
+        
+        conteudos = "";
                 
         for (String testes : testao) {
-            List<String> lastNames = multimap.get(testes);
-            
+             List<String> lastNames = multimap.get(testes);
+            //System.out.println(lastNames);
+   
+           // System.out.println(testes +arrayDeNomes );
             for(int m=0;m< lastNames.size();m++){
-                System.out.println(testes + ", " + lastNames.get(m));
+                
+                if(m == (lastNames.size() - 1)){
+                    conteudos += lastNames.get(m);
+                }else{
+                    conteudos += lastNames.get(m) + ", ";
+                }
+                
+                
+//System.out.println("");
+                //  System.out.println(testes + ", " + lastNames.get(m));
             }
+            
+            System.out.println(testes + ", " + conteudos);
+            
+           // textoCsv.add(testes + ", " + conteudos);
+            conteudos = "";
         }   
+        
+        System.out.println(textoCsv);
+        
     }
+    
 }
+
