@@ -26,11 +26,13 @@ public class LeituraTxt {
 
   
 
-    public static ArrayList lerArquivo()
+    public static ArrayList lerArquivo(String nomeArquivo)
     {
         String linha = new String();
-        String nomeArquivo = "D:\\Dados\\Documentos\\Alexandre\\Unicamp\\4 Semestre\\Poo\\Projeto 1\\Ex5_TresMotivosParaVacinarSeuPet.txt";
-        String nomeArquivo2 = "D:\\Dados\\Documentos\\Alexandre\\Unicamp\\4 Semestre\\Poo\\Projeto 1\\Ex4_Parabens.txt";
+        
+       /* String nomeArquivo  = "D:\\Dados\\Documentos\\Alexandre\\Unicamp\\4 Semestre\\Poo\\Projeto 1\\Ex5_TresMotivosParaVacinarSeuPet.txt";
+        String nomeArquivo2 = "D:\\Dados\\Documentos\\Alexandre\\Unicamp\\4 Semestre\\Poo\\Projeto 1\\Ex4_Parabens.txt";*/
+        
         File arq = new File(nomeArquivo);
         ArrayList texto = new ArrayList();
         if(arq.exists()){
@@ -53,7 +55,7 @@ public class LeituraTxt {
                     linha = linha.replace( ";" , ""); //tira ponto e virgula
                     linha = linha.replace( ":" , ""); //tira dois pontos
                     linha = linha.replace( "!" , ""); //tira ponto de exclamacao
-                    linha = linha.replace( "?" , ""); //tira ponto de interrogação
+                    linha = linha.replace( "?" , ""); //tira ponto de interrogacao
                     
                     
                   
@@ -80,7 +82,7 @@ public class LeituraTxt {
                 
             }catch(Exception e){
                 
-                
+                System.out.println(e);
             }
          
         }
