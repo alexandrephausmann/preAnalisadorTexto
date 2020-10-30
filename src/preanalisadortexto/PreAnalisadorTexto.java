@@ -35,21 +35,7 @@ public class PreAnalisadorTexto {
        // System.out.println(retorno);
         teste.multimap(retorno);
         
-       // System.out.println(retorno);
-        //assertEquals(1, map.size());
-       
-        /*
-        
-        
-        for (President pres : US_PRESIDENTS_IN_ORDER) {
-            
-            
-          multimap.put(pres.firstName(), pres.lastName());
-        }
-        for (String firstName : multimap.keySet()) {
-          List<String> lastNames = multimap.get(firstName);
-          out.println(firstName + ": " + lastNames);
-        }*/
+      
       
     }
      

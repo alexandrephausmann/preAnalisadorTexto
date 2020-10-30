@@ -12,7 +12,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.text.Normalizer;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -22,21 +22,7 @@ import java.util.Map;
  * @author Alexandre
  */
 public class LeituraTxt {
-    /*
-    public String modelo;
-    public String cor;
-    private float ponta;
-    protected int carga;
-    protected boolean tampada;
    
-    public void status()
-    {
-            System.out.println("Modelo: " +this.modelo);
-            System.out.println("Uma caneta " + this.cor);
-            System.out.println("Ponta: " + this.ponta);
-            System.out.println("Carga: " + this.carga);
-            System.out.println("Est√° tampada? " + this.tampada);
-    }*/
 
   
 
@@ -61,42 +47,25 @@ public class LeituraTxt {
                     linha = linha.trim();
                     linha = linha.replace( "." , ""); //tira ponto
                     linha = linha.replace( "/" , ""); //tira barra
-                    linha = linha.replace( "-" , ""); //tira h√≠fen 
-                    //linha = linha.replace( " " , ""); //tira espa√ßo em branco
+                    linha = linha.replace( "-" , ""); //tira hifen 
+                    //linha = linha.replace( " " , ""); //tira espaco em branco
                     linha = linha.replace( "," , ""); //tira virgula
-                    linha = linha.replace( ";" , ""); //tira ponto
-                    linha = linha.replace( ":" , ""); //tira ponto
-                    linha = linha.replace( "!" , ""); //tira ponto
-                    linha = linha.replace( "?" , ""); //tira ponto
+                    linha = linha.replace( ";" , ""); //tira ponto e virgula
+                    linha = linha.replace( ":" , ""); //tira dois pontos
+                    linha = linha.replace( "!" , ""); //tira ponto de exclamacao
+                    linha = linha.replace( "?" , ""); //tira ponto de interrogaÁ„o
                     
                     
-                   // System.out.println(linha);
-                   // ArrayList lista = new ArrayList();     
-                    
-                   // lista.add(linha);
-                    
+                  
                     String[] textoSeparado = linha.split(" ");
-                   // System.out.println(textoSeparado);
-                    //System.out.println(textoSeparado);
-                  //  System.out.println(Arrays.toString(textoSeparado));
-                  //  System.out.println(textoSeparado.length);
-                    
+                  
                     for(String nome : textoSeparado){
                         if(!linha.trim().equals("")){
                             texto.add(nome.trim());
-                           // System.out.println(nome.trim());
+                           
                             
                         }
                     }
-                //    System.out.println(texto);
-/*
-                    
-                        texto.add(Arrays.toString(textoSeparado).replace("[","").replace("]",""));
-                    }
-                    */
-                    
-                    //System.out.println(texto);
-                    //lista.trimToSize();
 
                     
                     if(linha == null){
@@ -113,55 +82,39 @@ public class LeituraTxt {
                 
                 
             }
-        
-        //System.out.println(texto);
-
+         
         }
-      /*  
-        Map m = new HashMap();
-
-        m.put(objetoChave, objetoValor);*/
-           
-        return texto;
+		return texto;
 
     }
     public static String removerAcentos(String str) {
         return Normalizer.normalize(str, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
     }
     
+    
     public static void multimap(ArrayList texto)
     {
-      /*  String para = "para";
-        String parabens = "parabens";
-        String voce = "voce";*/
+      
         
         
         ArrayList textoCsv = new ArrayList< ArrayList>();
         
         ListMultimap<String, String> multimap = ArrayListMultimap.create();
 
-        //when
-       /*
-        multimap.put(para, "voce");
-        multimap.put(voce, "nesta");
-        multimap.put(para, "voce");
-        multimap.put(voce, "quer");
-        multimap.put("queijo", "minas");
-        */
+       
         int j=1;
 
         for(int i=0;i<(texto.size()-1);i++,j++){ 
              
            List<String> Key = multimap.get(texto.get(i).toString().trim());
-         //   System.out.println("Teste " + multimap.get(texto.get(i).toString().trim()));
+        
            if(!Key.contains(texto.get(j).toString().trim()))
            {
     
                multimap.put(texto.get(i).toString().trim(), texto.get(j).toString().trim());
            }
 
-           //System.out.println(multimap.keySet());
-           //System.out.println(texto.get(i) + "," +texto.get(j) );
+          
         
          }
             
@@ -180,9 +133,7 @@ public class LeituraTxt {
                 
         for (String testes : testao) {
              List<String> lastNames = multimap.get(testes);
-            //System.out.println(lastNames);
-   
-           // System.out.println(testes +arrayDeNomes );
+           
             for(int m=0;m< lastNames.size();m++){
                 
                 if(m == (lastNames.size() - 1)){
@@ -192,13 +143,10 @@ public class LeituraTxt {
                 }
                 
                 
-//System.out.println("");
-                //  System.out.println(testes + ", " + lastNames.get(m));
             }
             
             System.out.println(testes + ", " + conteudos);
             
-           // textoCsv.add(testes + ", " + conteudos);
             conteudos = "";
         }   
         
