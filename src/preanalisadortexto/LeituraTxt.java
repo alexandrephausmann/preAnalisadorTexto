@@ -94,7 +94,7 @@ public class LeituraTxt {
     }
     
     
-    public static void multimap(ArrayList texto)
+    public static ArrayList<ArrayList<String>> multimap(ArrayList texto)
     {
       
         
@@ -124,10 +124,16 @@ public class LeituraTxt {
         System.out.println(multimap);
         System.out.println(multimap.keySet());
         
+        //ArrayList<String> matriz = new ArrayList<String>(); 
+        
+        ArrayList<ArrayList<String>> matriz = new ArrayList<ArrayList<String>>();
+         
+          
+        
         List<String> testao = new ArrayList<>(multimap.keySet()); 
         Collections.sort(testao);
         
-        System.out.println(testao);
+        //System.out.println(testao);
         
         String conteudos = new String();
         
@@ -146,13 +152,22 @@ public class LeituraTxt {
                 
                 
             }
-            
+           // System.out.println("aaaaa");
             System.out.println(testes + ", " + conteudos);
+            ArrayList<String> retornoCSV = new ArrayList<String>();
+           
+             retornoCSV.add(testes + ", " + conteudos);   
+            
+           matriz.add(retornoCSV);
             
             conteudos = "";
         }   
+         
+        System.out.println(matriz);
         
-        System.out.println(textoCsv);
+        //System.out.println(textoCsv);
+        
+        return matriz;
         
     }
     

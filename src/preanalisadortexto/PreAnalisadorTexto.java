@@ -35,19 +35,28 @@ public class PreAnalisadorTexto {
         
         //tem que colocar o nome do arquivo aki pra funcionar
        
-        retorno = LeituraTxt.lerArquivo("C:\\Users\\PaschoaliniS2\\Desktop\\Entrada.txt");
+        retorno = LeituraTxt.lerArquivo("D:\\Dados\\Documentos\\Alexandre\\Unicamp\\4 Semestre\\Poo\\Projeto 1\\parabens.txt");
         
+        ArrayList<ArrayList<String>> textoCSV = new ArrayList<ArrayList<String>>();  
        // System.out.println(retorno);
-        teste.multimap(retorno);
-        
+       
+        textoCSV = teste.multimap(retorno);
+        System.out.println("teste" + textoCSV);
+           
         ExportarCSV testarSaida = new ExportarCSV();
+        
+        testarSaida.Exportar(textoCSV);
+        
+        
         
        /* ArrayList saida = new ArrayList();
         saida.add("uma;");
         saida.add("duas;");
         saida.add("coisas;");*/
+       
+        //System.out.println("asfuasfhasufhas");
 
-        testarSaida.Exportar(retorno);
+        //testarSaida.Exportar(retorno);
     }
      
 }
