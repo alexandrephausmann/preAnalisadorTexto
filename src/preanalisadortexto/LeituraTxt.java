@@ -156,9 +156,9 @@ public class LeituraTxt {
             System.out.println(testes + ", " + conteudos);
             ArrayList<String> retornoCSV = new ArrayList<String>();
            
-             retornoCSV.add(testes + ", " + conteudos);   
+            retornoCSV.add(testes + ", " + conteudos);   
             
-           matriz.add(retornoCSV);
+            matriz.add(retornoCSV);
             
             conteudos = "";
         }   
