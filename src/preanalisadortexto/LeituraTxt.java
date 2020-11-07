@@ -9,7 +9,9 @@ import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.ListMultimap;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.text.Normalizer;
 import java.util.ArrayList;
 
@@ -18,22 +20,25 @@ import java.util.List;
 
 /**
  * Realiza a leitura do arquivo(.txt)
- * autor: Alexandre
+ * Autor: Alexandre
  */
 public class LeituraTxt {
 
     public static ArrayList LerArquivo(String nomeArquivo) {
+            
         String linha = new String();
+        
         File arq = new File(nomeArquivo);
         ArrayList texto = new ArrayList();
         if (arq.exists()) {
             try {
                 
-                FileReader leitorArquivos = new FileReader(nomeArquivo);
-                BufferedReader bufferArquivo = new BufferedReader(leitorArquivos);
+                //FileReader leitorArquivos = new FileReader(nomeArquivo);
+                
+                BufferedReader bufferArquivo = new BufferedReader(new InputStreamReader(new FileInputStream(nomeArquivo), "UTF-8"));
 
                 while (true) {
-                    linha = removerAcentos(bufferArquivo.readLine().toLowerCase());
+                    linha = bufferArquivo.readLine().toLowerCase();
                     if (linha == null) {
                         break;
                     }
@@ -57,16 +62,12 @@ public class LeituraTxt {
                     }
                 }
             }catch (Exception e) {
-                //System.out.println(e);
+                System.out.println(e);
             }
         }
         return texto;
     }
-
-    public static String removerAcentos(String str) {
-        return Normalizer.normalize(str, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
-    }
-
+    
     /**
      * <p>
      * Uma descrição de como funciona a documentação do MultiMap.
