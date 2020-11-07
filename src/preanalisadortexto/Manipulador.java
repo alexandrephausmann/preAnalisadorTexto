@@ -11,6 +11,7 @@ import java.util.Properties;
 
 /**
  * Classe responsável por manipulação do arquivo .properties (arquivo de configuração)
+ * Autor: Juan
  */
 public class Manipulador {
 

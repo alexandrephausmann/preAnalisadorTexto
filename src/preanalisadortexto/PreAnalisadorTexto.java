@@ -11,8 +11,8 @@ import java.util.Properties;
 import static preanalisadortexto.Manipulador.getProp;
 
 /**
- *
- * @author Alexandre
+ * Classe principal para comunicação entre as classes e execução do programa principal
+ * Autor:Guilherme
  */
 public class PreAnalisadorTexto {
 
@@ -28,13 +28,14 @@ public class PreAnalisadorTexto {
         Properties prop = getProp();
         ExportarCSV exportar = new ExportarCSV();
         ArrayList<ArrayList<String>> textoCSV = new ArrayList<ArrayList<String>>();
-        String path;
+        String path = new String();
         try {
             path = prop.getProperty("Path");
-
+            
+            System.out.println("pasta: " + path);
             //Faz a leitura do arquivo
             retorno = LeituraTxt.LerArquivo(path);
-
+            
             //MultiMap do arquivo.
             textoCSV = leituraTXT.Multimap(retorno);
 

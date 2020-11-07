@@ -14,6 +14,7 @@ import java.util.ArrayList;
 
 /**
  * Classe que realiza a exportação para .csv
+ * Autor:Samantha
  */
 public class ExportarCSV {
 
