@@ -5,16 +5,10 @@
  */
 package preanalisadortexto;
 
-
-
-import java.util.Map;
-
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ListMultimap;
-
 import java.io.IOException;
 import java.util.ArrayList;
-
+import java.util.Properties;
+import static preanalisadortexto.Manipulador.getProp;
 
 /**
  *
@@ -24,39 +18,40 @@ public class PreAnalisadorTexto {
 
     /**
      * @param args the command line arguments
-     * @throws IOException 
+     * @throws IOException
      */
     public static void main(String[] args) throws IOException {
-        
+
         // TODO code application logic here
         ArrayList retorno = new ArrayList();
-        
-        LeituraTxt teste = new LeituraTxt();
-        
-        //tem que colocar o nome do arquivo aki pra funcionar
-       
-        retorno = LeituraTxt.lerArquivo("D:\\Dados\\Documentos\\Alexandre\\Unicamp\\4 Semestre\\Poo\\Projeto 1\\parabens.txt");
-        
-        ArrayList<ArrayList<String>> textoCSV = new ArrayList<ArrayList<String>>();  
-       // System.out.println(retorno);
-       
-        textoCSV = teste.multimap(retorno);
-        System.out.println("teste" + textoCSV);
-           
-        ExportarCSV testarSaida = new ExportarCSV();
-        
-        testarSaida.Exportar(textoCSV);
-        
-        
-        
-       /* ArrayList saida = new ArrayList();
-        saida.add("uma;");
-        saida.add("duas;");
-        saida.add("coisas;");*/
-       
-        //System.out.println("asfuasfhasufhas");
+        LeituraTxt leituraTXT = new LeituraTxt();
+        Properties prop = getProp();
+        ExportarCSV exportar = new ExportarCSV();
+        ArrayList<ArrayList<String>> textoCSV = new ArrayList<ArrayList<String>>();
+        String path;
+        try {
+            path = prop.getProperty("Path");
 
-        //testarSaida.Exportar(retorno);
+            //Faz a leitura do arquivo
+            retorno = LeituraTxt.LerArquivo(path);
+
+            //MultiMap do arquivo.
+            textoCSV = leituraTXT.Multimap(retorno);
+
+            //Exporta o arquivo
+            exportar.Exportar(textoCSV);
+        } 
+        catch (NullPointerException e) 
+        {
+           System.out.println("O valor da propriedade 'Path' está nulo, verifique o arquivo dados.properties!");
+        }
+        finally
+        {
+            System.out.println("O arquivo foi exportado com sucesso!");
+        }
+        //Procura o arquivo de configuração, onde posso alterar de onde quero ler o .txt
+        //Nao deixando o caminho hardedcode e dificultando o acesso
+
     }
-     
+
 }
