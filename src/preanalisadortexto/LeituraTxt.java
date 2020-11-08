@@ -42,24 +42,33 @@ public class LeituraTxt {
                     if (linha == null) {
                         break;
                     }
+
                     linha = linha.trim();
                     linha = linha.replace(".", ""); //tira ponto
                     linha = linha.replace("/", ""); //tira barra
-                    linha = linha.replace("-", ""); //tira hifen 
-                    //linha = linha.replace( " " , ""); //tira espaco em branco
+                    linha = linha.replace("-", ""); //tira hifen        
                     linha = linha.replace(",", ""); //tira virgula
                     linha = linha.replace(";", ""); //tira ponto e virgula
                     linha = linha.replace(":", ""); //tira dois pontos
                     linha = linha.replace("!", ""); //tira ponto de exclamacao
                     linha = linha.replace("?", ""); //tira ponto de interrogacao
-
+                    linha = linha.replace("\"", ""); //tira aspas normal
+                    linha = linha.replace("“", ""); //tira aspas com deficiencia
+                    linha = linha.replace("”", "");//tira aspas com deficiencia
+                    linha = linha.replace("–", ""); //tira hifen
+                    
+                 
                     String[] textoSeparado = linha.split(" ");
 
                     for (String nome : textoSeparado) {
                         if (!linha.trim().equals("")) {
-                            texto.add(nome.trim());
+                            if(!nome.isEmpty()){
+                              texto.add(nome.trim());   
+                            }                                         
                         }
+                 
                     }
+             
                 }
             }catch (Exception e) {
                 System.out.println(e);
@@ -78,14 +87,17 @@ public class LeituraTxt {
     public static ArrayList<ArrayList<String>> Multimap(ArrayList texto) {
 
         ListMultimap<String, String> multimap = ArrayListMultimap.create();
-
+        String elemento2 = new String();
+        
         int j = 1;
-
+        
         for (int i = 0; i < (texto.size() - 1); i++,j++) {
             List<String> Key = multimap.get(texto.get(i).toString().trim());
-
-            if (!Key.contains(texto.get(j).toString().trim())) {
-                multimap.put(texto.get(i).toString().trim(), texto.get(j).toString().trim());
+            
+            if (!Key.contains(texto.get(j).toString().trim()) ) {
+                if (!texto.get(i).toString().trim().isEmpty()) {     
+                    multimap.put(texto.get(i).toString().trim(), texto.get(j).toString().trim());   
+                }
             }
         }
         
